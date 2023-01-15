@@ -1,9 +1,5 @@
 import { Command } from 'https://deno.land/x/cliffy@v0.25.7/command/mod.ts';
-import {
-  Input,
-  Number,
-  Select,
-} from 'https://deno.land/x/cliffy@v0.25.6/prompt/mod.ts';
+import { Select } from 'https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts';
 import { getBook, searchBook } from './mod.ts';
 
 const searchCmd = new Command()
@@ -14,7 +10,7 @@ const searchCmd = new Command()
     const searchResult: OpenLibrary.ISearch = await searchBook(name);
     const selectOptions = searchResult.docs.map((book) => {
       return {
-        name: `${book.title} by ${
+        name: `${book.title} (${book.first_publish_year}) by ${
           book.author_name ? book.author_name.join(', ') : ''
         }`,
         value: book.key,
@@ -41,7 +37,7 @@ await new Command()
   .version('v1.0.0')
   .description('Search books')
   .meta('Author', 'Tim Hårek Andreassen <tim@harek.no>')
-  .meta('Source', 'https://github.com/timharek/***')
+  .meta('Source', 'https://git.sr.ht/~timharek/deno-books')
   .globalOption(
     '-v, --verbose',
     'A more verbose output. (doesn\'t do anything atm)',
