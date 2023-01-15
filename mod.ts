@@ -26,7 +26,7 @@ export async function searchBook(query: string) {
 
 export async function getBook(id: string) {
   const url = API_URL;
-  url.pathname = `/books/${id}`;
+  url.pathname = `/works/${id}`;
 
   const result = await _fetch(url);
   return result;
