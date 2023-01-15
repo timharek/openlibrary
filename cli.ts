@@ -7,7 +7,9 @@ import {
 import { getBook, searchBook } from './mod.ts';
 
 const searchCmd = new Command()
-  .description('tbd')
+  .description(
+    'Search for a specific title. If you include the authors name it will help with the results.',
+  )
   .action(async (options: unknown, name: string) => {
     const searchResult: OpenLibrary.ISearch = await searchBook(name);
     const selectOptions = searchResult.docs.map((book) => {
@@ -25,7 +27,7 @@ const searchCmd = new Command()
   });
 
 const getCmd = new Command()
-  .description('tbd')
+  .description('Get a specific book.')
   .action(async (options: unknown, id: string) => {
     const book: OpenLibrary.IBook = await getBook(id);
 
@@ -38,11 +40,17 @@ await new Command()
   .description('Search books')
   .meta('Author', 'Tim Hårek Andreassen <tim@harek.no>')
   .meta('Source', 'https://github.com/timharek/***')
-  .example('', ``)
-  .globalOption('-v, --verbose', 'A more verbose output.', {
-    collect: true,
-    value: (value: boolean, previous: number = 0) => (value ? previous + 1 : 0),
-  })
+  .globalOption(
+    '-v, --verbose',
+    'A more verbose output. (doesn\'t do anything atm)',
+    {
+      collect: true,
+      value: (
+        value: boolean,
+        previous: number = 0,
+      ) => (value ? previous + 1 : 0),
+    },
+  )
   .command('search <name:string>', searchCmd)
   .command(
     'get <id:string>',
