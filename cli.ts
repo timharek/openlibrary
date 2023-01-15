@@ -6,7 +6,7 @@ import {
 } from 'https://deno.land/x/cliffy@v0.25.6/prompt/mod.ts';
 import { getBook, searchBook } from './mod.ts';
 
-const searchCmd = await new Command()
+const searchCmd = new Command()
   .description('tbd')
   .action(async (options: unknown, name: string) => {
     const searchResult: OpenLibrary.ISearch = await searchBook(name);
@@ -24,10 +24,12 @@ const searchCmd = await new Command()
     console.log(selectedResult);
   });
 
-const getCmd = await new Command()
+const getCmd = new Command()
   .description('tbd')
   .action(async (options: unknown, id: string) => {
-    console.log('Not implemented yet, sorry!');
+    const book: OpenLibrary.IBook = await getBook(id);
+
+    console.log(book);
   });
 
 await new Command()
