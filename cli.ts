@@ -14,7 +14,9 @@ const searchCmd = new Command()
     const searchResult: OpenLibrary.ISearch = await searchBook(name);
     const selectOptions = searchResult.docs.map((book) => {
       return {
-        name: `${book.title} by ${book.author_name.join(', ')}`,
+        name: `${book.title} by ${
+          book.author_name ? book.author_name.join(', ') : ''
+        }`,
         value: book.key,
       };
     });
