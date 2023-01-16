@@ -19,6 +19,7 @@ const searchCmd = new Command()
     const selectedResult: string = await Select.prompt({
       message: 'Which book is correct?',
       options: selectOptions,
+      ...(selectOptions.length > 10 && { search: true }),
     });
 
     console.log(selectedResult);
