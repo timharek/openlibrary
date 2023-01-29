@@ -1,28 +1,13 @@
-import { Command } from 'https://deno.land/x/cliffy@v0.25.7/command/mod.ts';
-import { Select } from 'https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts';
-import { getBook, searchBook } from './mod.ts';
+import { Command } from '../deps.ts';
+import { getBook } from './util.ts';
+import { findBook } from './prompt.ts';
 
 const searchCmd = new Command()
   .description(
     'Search for a specific title. If you include the authors name it will help with the results.',
   )
   .action(async (options: unknown, name: string) => {
-    const searchResult: OpenLibrary.ISearch = await searchBook(name);
-    const selectOptions = searchResult.docs.map((book) => {
-      return {
-        name: `${book.title} (${book.first_publish_year}) by ${
-          book.author_name ? book.author_name.join(', ') : ''
-        }`,
-        value: book.key,
-      };
-    });
-    const selectedResult: string = await Select.prompt({
-      message: 'Which book is correct?',
-      options: selectOptions,
-      ...(selectOptions.length > 10 && { search: true }),
-    });
-
-    console.log(selectedResult);
+    console.log(await findBook(name));
   });
 
 const getCmd = new Command()

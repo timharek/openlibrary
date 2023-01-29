@@ -27,6 +27,6 @@
     }
   },
   "tasks": {
-    "run": "deno run --allow-net=openlibrary.org cli.ts"
+    "run": "deno run --allow-net=openlibrary.org src/cli.ts"
   }
 }
