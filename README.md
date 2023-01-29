@@ -8,14 +8,12 @@ Access [OpenLibrary](https://openlibrary.org/developers/api)'s API via Deno.
 ## Usage
 
 ```typescript
-import {
-  searchBook,
-  getBook,
-} from "https://git.sr.ht/~timharek/deno-books/blob/main/mod.ts";
+import { searchBook, getBook } from "https://deno.land/x/deno_books/mod.ts";
 ```
 
 ## Install as CLI
 
 ```sh
-deno install --allow-net=openlibrary.org https://git.sr.ht/~timharek/deno-books/blob/main/cli.ts
+deno install --allow-net=openlibrary.org \
+  -n books https://deno.land/x/deno_books/src/cli.ts
 ```
