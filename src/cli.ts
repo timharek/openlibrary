@@ -20,7 +20,7 @@ const getCmd = new Command()
 
 await new Command()
   .name('books')
-  .version('v1.0.1')
+  .version('v1.0.2')
   .description('Search books')
   .meta('Author', 'Tim Hårek Andreassen <tim@harek.no>')
   .meta('Source', 'https://git.sr.ht/~timharek/deno-books')
