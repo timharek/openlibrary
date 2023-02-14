@@ -27,6 +27,11 @@
     }
   },
   "tasks": {
-    "run": "deno run --allow-net=openlibrary.org src/cli.ts"
+    "run": "deno run --allow-net=openlibrary.org src/cli.ts",
+    "check": "deno fmt --check && deno lint",
+    "setup:hooks": "deno run -A -r https://deno.land/x/githooks/githooks.ts"
+  },
+  "githooks": {
+    "pre-commit": "check"
   }
 }

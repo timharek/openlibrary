@@ -6,13 +6,13 @@ const searchCmd = new Command()
   .description(
     'Search for a specific title. If you include the authors name it will help with the results.',
   )
-  .action(async (options: unknown, name: string) => {
+  .action(async (_options: unknown, name: string) => {
     console.log(await findBook(name));
   });
 
 const getCmd = new Command()
   .description('Get a specific book.')
-  .action(async (options: unknown, id: string) => {
+  .action(async (_options: unknown, id: string) => {
     const book: OpenLibrary.IBook = await getBook(id);
 
     console.log(book);
@@ -31,7 +31,7 @@ await new Command()
       collect: true,
       value: (
         value: boolean,
-        previous: number = 0,
+        previous = 0,
       ) => (value ? previous + 1 : 0),
     },
   )
