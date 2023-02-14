@@ -32,6 +32,7 @@
     "setup:hooks": "deno run -A -r https://deno.land/x/githooks/githooks.ts"
   },
   "githooks": {
-    "pre-commit": "check"
+    "pre-commit": "check",
+    "pre-push": "check"
   }
 }
