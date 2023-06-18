@@ -1,11 +1,9 @@
 {
   "lint": {
-    "files": {
-      "include": [
-        "src/",
-        "types/"
-      ]
-    },
+    "include": [
+      "src/",
+      "types/"
+    ],
     "rules": {
       "tags": [
         "recommended"
@@ -13,18 +11,14 @@
     }
   },
   "fmt": {
-    "files": {
-      "include": [
-        "./"
-      ]
-    },
-    "options": {
-      "useTabs": false,
-      "lineWidth": 80,
-      "indentWidth": 2,
-      "singleQuote": true,
-      "proseWrap": "preserve"
-    }
+    "include": [
+      "./"
+    ],
+    "useTabs": false,
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "singleQuote": true,
+    "proseWrap": "preserve"
   },
   "tasks": {
     "run": "deno run --allow-net=openlibrary.org src/cli.ts",
