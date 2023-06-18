@@ -21,6 +21,6 @@ tasks:
       ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
       git push github main
       if [ "$(git describe --exact-match --tags HEAD)" ]; then \
-        git push --tags github \
+        git push --tags github; \
       fi
 
