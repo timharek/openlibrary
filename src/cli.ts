@@ -26,7 +26,7 @@ await new Command()
   .meta('Source', 'https://git.sr.ht/~timharek/deno-books')
   .globalOption(
     '-v, --verbose',
-    'A more verbose output. (doesn\'t do anything atm)',
+    "A more verbose output. (doesn't do anything atm)",
     {
       collect: true,
       value: (
