@@ -13,7 +13,7 @@ const searchCmd = new Command()
 const getCmd = new Command()
   .description('Get a specific book.')
   .action(async (_options: unknown, id: string) => {
-    const book: OpenLibrary.IBook = await getBook(id);
+    const book = await getBook(id);
 
     console.log(book);
   });

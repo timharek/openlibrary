@@ -1,8 +1,8 @@
-// @deno-types="../mod.d.ts"
+import { Book, Search } from './schemas.ts';
 
 const API_URL = new URL('https://openlibrary.org');
 
-async function _fetch(url: string | URL) {
+async function _fetch(url: string | URL): Promise<unknown> {
   const result = await fetch(url, {
     method: 'GET',
     headers: {
@@ -17,19 +17,19 @@ async function _fetch(url: string | URL) {
   return result;
 }
 
-export async function searchBook(query: string) {
+export async function searchBook(query: string): Promise<Search> {
   const url = API_URL;
   url.pathname = '/search.json';
   url.searchParams.set('q', query);
 
   const result = await _fetch(url);
-  return result;
+  return Search.parse(result);
 }
 
-export async function getBook(id: string) {
+export async function getBook(id: string): Promise<Book> {
   const url = API_URL;
   url.pathname = `/works/${id}`;
 
   const result = await _fetch(url);
-  return result;
+  return Book.parse(result);
 }
