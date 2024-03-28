@@ -9,7 +9,7 @@ Access [OpenLibrary](https://openlibrary.org/developers/api)'s API via Deno.
 ## Usage
 
 ```typescript
-import { getBook, searchBook } from "https://deno.land/x/deno_books/mod.ts";
+import { getBook, searchBook } from 'https://deno.land/x/deno_books/mod.ts';
 ```
 
 ## Install as CLI
