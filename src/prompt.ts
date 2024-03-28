@@ -8,7 +8,7 @@ export async function findBook(bookQuery: string) {
       name: `${book.title} (${book.first_publish_year}) by ${
         book.author_name ? book.author_name.join(', ') : ''
       }`,
-      value: book.key,
+      value: book.key.split('/').at(-1),
     };
   });
   const selectedResult: string = await Select.prompt({
