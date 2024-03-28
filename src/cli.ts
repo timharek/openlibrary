@@ -28,6 +28,12 @@ const searchCmd = new Command<GlobalOptions>()
   .arguments('<name:string>')
   .action(async ({ json }, name: string) => {
     const foundBook = await findBook(name);
+
+    if (!foundBook) {
+      console.log('No result');
+      Deno.exit(0);
+    }
+
     const book = await getBook(foundBook);
     if (json) {
       console.log(JSON.stringify(book, null, 2));
