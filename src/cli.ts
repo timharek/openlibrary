@@ -2,23 +2,7 @@ import { Command } from '../deps.ts';
 import { getBook } from './util.ts';
 import { findBook } from './prompt.ts';
 
-const searchCmd = new Command()
-  .description(
-    'Search for a specific title. If you include the authors name it will help with the results.',
-  )
-  .action(async (_options: unknown, name: string) => {
-    console.log(await findBook(name));
-  });
-
-const getCmd = new Command()
-  .description('Get a specific book.')
-  .action(async (_options: unknown, id: string) => {
-    const book = await getBook(id);
-
-    console.log(book);
-  });
-
-await new Command()
+const app = new Command()
   .name('books')
   .version('v1.0.2')
   .description('Search books')
@@ -34,10 +18,40 @@ await new Command()
         previous = 0,
       ) => (value ? previous + 1 : 0),
     },
+  );
+export type GlobalOptions = typeof app extends
+  Command<void, void, void, [], infer Options extends Record<string, unknown>>
+  ? Options
+  : never;
+
+const searchCmd = new Command<GlobalOptions>()
+  .description(
+    'Search for a specific title. If you include the authors name it will help with the results.',
   )
-  .command('search <name:string>', searchCmd)
-  .command(
-    'get <id:string>',
-    getCmd,
-  )
-  .parse(Deno.args);
+  .arguments('<name:string>')
+  .action(async (_options, name: string) => {
+    console.log(await findBook(name));
+  });
+
+const getCmd = new Command<GlobalOptions>()
+  .description('Get a specific book.')
+  .arguments('<id:string>')
+  .action(async (_options, id: string) => {
+    const book = await getBook(id);
+
+    console.log(book);
+  });
+
+if (import.meta.main) {
+  try {
+    await app
+      .command('search', searchCmd)
+      .command('get', getCmd)
+      .parse(Deno.args);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.toString());
+      Deno.exit(1);
+    }
+  }
+}
