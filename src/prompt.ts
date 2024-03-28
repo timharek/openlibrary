@@ -1,7 +1,7 @@
 import { Select } from '../deps.ts';
 import { searchBook } from './util.ts';
 
-export async function findBook(bookQuery: string) {
+export async function findBook(bookQuery: string): Promise<string | null> {
   const searchResult = await searchBook(bookQuery);
   const selectOptions = searchResult.docs.map((book) => {
     return {
@@ -11,11 +11,11 @@ export async function findBook(bookQuery: string) {
       value: book.key.split('/').at(-1),
     };
   });
-  const selectedResult: string = await Select.prompt({
+  const selectedResult = await Select.prompt<string>({
     message: 'Which book is correct?',
     options: selectOptions,
     ...(selectOptions.length > 10 && { search: true }),
   });
 
-  return selectedResult;
+  return selectedResult ?? null;
 }
