@@ -1,6 +1,13 @@
 import { Command } from '../deps.ts';
 import { getBook } from './util.ts';
 import { findBook } from './prompt.ts';
+import { Book } from './schemas.ts';
+
+function stringifyBook(book: Book) {
+  return `Title: ${book.title}
+Description: ${book.description}
+Author(s): ${book.authors.map((author) => author.author.key)}`;
+}
 
 const app = new Command()
   .name('books')
@@ -8,17 +15,7 @@ const app = new Command()
   .description('Search books')
   .meta('Author', 'Tim Hårek Andreassen <tim@harek.no>')
   .meta('Source', 'https://git.sr.ht/~timharek/deno-books')
-  .globalOption(
-    '-v, --verbose',
-    "A more verbose output. (doesn't do anything atm)",
-    {
-      collect: true,
-      value: (
-        value: boolean,
-        previous = 0,
-      ) => (value ? previous + 1 : 0),
-    },
-  );
+  .globalOption('--json', 'JSON output.');
 export type GlobalOptions = typeof app extends
   Command<void, void, void, [], infer Options extends Record<string, unknown>>
   ? Options
@@ -29,17 +26,27 @@ const searchCmd = new Command<GlobalOptions>()
     'Search for a specific title. If you include the authors name it will help with the results.',
   )
   .arguments('<name:string>')
-  .action(async (_options, name: string) => {
-    console.log(await findBook(name));
+  .action(async ({ json }, name: string) => {
+    const foundBook = await findBook(name);
+    const book = await getBook(foundBook);
+    if (json) {
+      console.log(JSON.stringify(book, null, 2));
+      Deno.exit(0);
+    }
+    console.log(stringifyBook(book));
   });
 
 const getCmd = new Command<GlobalOptions>()
   .description('Get a specific book.')
   .arguments('<id:string>')
-  .action(async (_options, id: string) => {
+  .action(async ({ json }, id: string) => {
     const book = await getBook(id);
+    if (json) {
+      console.log(JSON.stringify(book, null, 2));
+      Deno.exit(0);
+    }
 
-    console.log(book);
+    console.log(stringifyBook(book));
   });
 
 if (import.meta.main) {
