@@ -1,3 +1,4 @@
+import config from '../deno.json' with { type: 'json' };
 import { Command } from '../deps.ts';
 import { getBook } from './util.ts';
 import { findBook } from './prompt.ts';
@@ -10,9 +11,9 @@ Author(s): ${book.authors.map((author) => author.author.key)}`;
 }
 
 const app = new Command()
-  .name('books')
-  .version('v1.0.2')
-  .description('Search books')
+  .name(config.name)
+  .version(`v${config.version}`)
+  .description('Search books via Open Library.')
   .meta('Author', 'Tim Hårek Andreassen <tim@harek.no>')
   .meta('Source', 'https://git.sr.ht/~timharek/deno-books')
   .globalOption('--json', 'JSON output.');
