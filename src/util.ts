@@ -1,4 +1,4 @@
-import { ISBNResult } from './schemas.ts';
+import { Author, ISBNResult } from './schemas.ts';
 import { Book, Search } from './schemas.ts';
 
 const API_URL = new URL('https://openlibrary.org');
@@ -33,6 +33,14 @@ export async function getBook(id: string): Promise<Book> {
 
   const result = await _fetch(url);
   return Book.parse(result);
+}
+
+export async function getAuthor(id: string): Promise<Author> {
+  const url = API_URL;
+  url.pathname = `/authors/${id}.json`;
+
+  const result = await _fetch(url);
+  return Author.parse(result);
 }
 
 export async function getBookByISBN(isbn: string): Promise<Book> {

@@ -19,7 +19,7 @@ export const Search = z.object({
   docs: z.array(Doc),
 });
 
-const Author = z.object({
+const AuthorObj = z.object({
   author: z.object({
     key: z.string(),
   }),
@@ -36,7 +36,7 @@ const Date = z.object({
 export const Book = z.object({
   title: z.string(),
   key: z.string(),
-  authors: z.array(Author),
+  authors: z.array(AuthorObj),
   type: z.object({
     key: z.string(),
   }),
@@ -65,6 +65,44 @@ export const ISBNResult = z.object({
   works: z.array(z.object({ key: z.string() })),
 });
 
+const stringDate = z.string(z.date());
+
+export const Author = z.object({
+  personal_name: z.string(),
+  remote_ids: z.object({
+    isni: z.string(),
+    viaf: z.string(),
+    wikidata: z.string(),
+  }),
+  source_records: z.array(z.string()),
+  key: z.string(),
+  alternate_names: z.array(z.string()),
+  links: z.array(z.object({
+    url: z.string().url(),
+    title: z.string(),
+    type: z.object({
+      key: z.string(),
+    }),
+  })),
+  photos: z.array(z.number()),
+  birth_date: stringDate,
+  type: z.object({
+    key: z.string(),
+  }),
+  name: z.string(),
+  latest_revision: z.number(),
+  revision: z.number(),
+  created: z.object({
+    type: z.string(),
+    value: stringDate,
+  }),
+  last_modified: z.object({
+    type: z.string(),
+    value: stringDate,
+  }),
+});
+
 export type Book = z.infer<typeof Book>;
 export type Search = z.infer<typeof Search>;
 export type ISBNResult = z.infer<typeof ISBNResult>;
+export type Author = z.infer<typeof Author>;
