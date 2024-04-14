@@ -56,5 +56,10 @@ export const Book = z.object({
   last_modified: Date,
 });
 
+export const ISBNResult = z.object({
+  works: z.array(z.object({ key: z.string() })),
+});
+
 export type Book = z.infer<typeof Book>;
 export type Search = z.infer<typeof Search>;
+export type ISBNResult = z.infer<typeof ISBNResult>;

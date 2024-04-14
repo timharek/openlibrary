@@ -1,6 +1,6 @@
 import config from '../deno.json' with { type: 'json' };
 import { Command } from '../deps.ts';
-import { getBook } from './util.ts';
+import { getBook, getBookByISBN } from './util.ts';
 import { findBook } from './prompt.ts';
 import { Book } from './schemas.ts';
 
@@ -56,11 +56,25 @@ const getCmd = new Command<GlobalOptions>()
     console.log(stringifyBook(book));
   });
 
+const isbnCmd = new Command<GlobalOptions>()
+  .description('Get a specific book.')
+  .arguments('<isbn:string>')
+  .action(async ({ json }, isbn: string) => {
+    const book = await getBookByISBN(isbn);
+    if (json) {
+      console.log(JSON.stringify(book, null, 2));
+      Deno.exit(0);
+    }
+
+    console.log(stringifyBook(book));
+  });
+
 if (import.meta.main) {
   try {
     await app
       .command('search', searchCmd)
       .command('get', getCmd)
+      .command('isbn', isbnCmd)
       .parse(Deno.args);
   } catch (error) {
     if (error instanceof Error) {
