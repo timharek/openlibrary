@@ -43,7 +43,12 @@ export const Book = z.object({
   description: z.string().or(z.object({
     type: z.literal('/type/text'),
     value: z.string(),
-  })),
+  })).transform((desc) => {
+    if (typeof desc === 'string') {
+      return desc;
+    }
+    return desc.value;
+  }),
   covers: z.array(z.number()),
   subject_places: z.array(z.string()).optional(),
   subjects: z.array(z.string()),
