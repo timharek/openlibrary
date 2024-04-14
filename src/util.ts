@@ -29,7 +29,7 @@ export async function searchBook(query: string): Promise<Search> {
 
 export async function getBook(id: string): Promise<Book> {
   const url = API_URL;
-  url.pathname = `/works/${id}`;
+  url.pathname = `/works/${id}.json`;
 
   const result = await _fetch(url);
   return Book.parse(result);
