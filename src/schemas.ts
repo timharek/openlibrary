@@ -102,7 +102,61 @@ export const Author = z.object({
   }),
 });
 
+export const SubjectResult = z.object(
+  {
+    key: z.string(),
+    name: z.string(),
+    subject_type: z.string(),
+    work_count: z.number(),
+    works: z.array(z.object(
+      {
+        key: z.string(),
+        title: z.string(),
+        edition_count: z.number(),
+        cover_id: z.number(),
+        cover_edition_key: z.string(),
+        subject: z.array(z.string()),
+        ia_collection: z.array(z.string()),
+        lendinglibrary: z.boolean(),
+        printdisabled: z.boolean(),
+        lending_edition: z.string(),
+        lending_identifier: z.string(),
+        authors: z.array(z.object({
+          key: z.string(),
+          name: z.string(),
+        })),
+        first_publish_year: z.number(),
+        ia: z.string(),
+        public_scan: z.boolean(),
+        has_fulltext: z.boolean(),
+        availability: z.object({
+          status: z.string(),
+          available_to_browse: z.boolean(),
+          available_to_borrow: z.boolean(),
+          available_to_waitlist: z.boolean(),
+          is_printdisabled: z.boolean(),
+          is_readable: z.boolean(),
+          is_lendable: z.boolean(),
+          is_previewable: z.boolean(),
+          identifier: z.string(),
+          isbn: z.string().nullable(),
+          oclc: z.string().nullable(),
+          openlibrary_work: z.string(),
+          openlibrary_edition: z.string(),
+          last_loan_date: z.string().nullable(),
+          num_waitlist: z.string().nullable(),
+          last_waitlist_date: z.string().nullable(),
+          is_restricted: z.boolean(),
+          is_browseable: z.boolean(),
+          __src__: z.string(),
+        }),
+      },
+    )),
+  },
+);
+
 export type Book = z.infer<typeof Book>;
 export type Search = z.infer<typeof Search>;
 export type ISBNResult = z.infer<typeof ISBNResult>;
 export type Author = z.infer<typeof Author>;
+export type SubjectResult = z.infer<typeof SubjectResult>;

@@ -1,3 +1,4 @@
+import { SubjectResult } from './schemas.ts';
 import { Author, ISBNResult } from './schemas.ts';
 import { Book, Search } from './schemas.ts';
 
@@ -56,4 +57,12 @@ export async function getBookByISBN(isbn: string): Promise<Book> {
   const bookResult = await getBook(id);
 
   return Book.parse(bookResult);
+}
+
+export async function getSubject(key: string): Promise<SubjectResult> {
+  const url = API_URL;
+  url.pathname = `/subjects/${key}.json`;
+
+  const result = await _fetch(url);
+  return SubjectResult.parse(result);
 }
