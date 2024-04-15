@@ -1,4 +1,6 @@
 image: alpine/edge
+packages:
+  - deno
 secrets:
   - 0323bc6f-a046-4b96-8496-2bac6e7ee107
 sources:
@@ -10,7 +12,10 @@ triggers:
     condition: failure
     to: tim@harek.no
 tasks:
-  - check: |
+  - test: |
+      cd $DIR
+      deno task check
+  - check_release: |
       cd $DIR
       if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then \
         complete-build; \
