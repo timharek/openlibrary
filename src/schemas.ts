@@ -35,6 +35,7 @@ const Date = z.object({
 
 export const Book = z.object({
   title: z.string(),
+  // TODO: Transform
   key: z.string(),
   authors: z.array(AuthorObj),
   type: z.object({
@@ -68,6 +69,9 @@ export const ISBNResult = z.object({
 const stringDate = z.string(z.date());
 
 export const Author = z.object({
+  // TODO: Transform
+  key: z.string(),
+  name: z.string(),
   personal_name: z.string(),
   remote_ids: z.object({
     isni: z.string(),
@@ -75,7 +79,6 @@ export const Author = z.object({
     wikidata: z.string(),
   }),
   source_records: z.array(z.string()),
-  key: z.string(),
   alternate_names: z.array(z.string()),
   links: z.array(z.object({
     url: z.string().url(),
@@ -89,7 +92,6 @@ export const Author = z.object({
   type: z.object({
     key: z.string(),
   }),
-  name: z.string(),
   latest_revision: z.number(),
   revision: z.number(),
   created: z.object({
@@ -104,6 +106,7 @@ export const Author = z.object({
 
 export const SubjectResult = z.object(
   {
+    // TODO: transform
     key: z.string(),
     name: z.string(),
     subject_type: z.string(),
@@ -131,25 +134,25 @@ export const SubjectResult = z.object(
         has_fulltext: z.boolean(),
         availability: z.object({
           status: z.string(),
-          available_to_browse: z.boolean(),
-          available_to_borrow: z.boolean(),
-          available_to_waitlist: z.boolean(),
-          is_printdisabled: z.boolean(),
-          is_readable: z.boolean(),
-          is_lendable: z.boolean(),
+          available_to_browse: z.boolean().nullable(),
+          available_to_borrow: z.boolean().nullable(),
+          available_to_waitlist: z.boolean().nullable(),
+          is_printdisabled: z.boolean().nullable(),
+          is_readable: z.boolean().nullable(),
+          is_lendable: z.boolean().nullable(),
           is_previewable: z.boolean(),
           identifier: z.string(),
           isbn: z.string().nullable(),
           oclc: z.string().nullable(),
-          openlibrary_work: z.string(),
-          openlibrary_edition: z.string(),
+          openlibrary_work: z.string().nullable(),
+          openlibrary_edition: z.string().nullable(),
           last_loan_date: z.string().nullable(),
           num_waitlist: z.string().nullable(),
           last_waitlist_date: z.string().nullable(),
           is_restricted: z.boolean(),
-          is_browseable: z.boolean(),
+          is_browseable: z.boolean().nullable(),
           __src__: z.string(),
-        }),
+        }).optional(),
       },
     )),
   },
