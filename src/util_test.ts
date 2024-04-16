@@ -15,7 +15,7 @@ Deno.test('Get book by `id`, Sapiens id: OL17075811W', async () => {
 
   assertExists(book);
   assertEquals(book.title.includes('Sapiens'), true, 'title');
-  assertEquals(book.key, '/works/OL17075811W', 'key/id');
+  assertEquals(book.key, 'OL17075811W', 'key/id');
   assertEquals(book.authors.length === 1, true, 'authors length');
 });
 
@@ -24,7 +24,7 @@ Deno.test('Get book by `isbn`, Sapiens id: OL17075811W', async () => {
 
   assertExists(book);
   assertEquals(book.title.includes('Sapiens'), true, 'title');
-  assertEquals(book.key, '/works/OL17075811W', 'key/id');
+  assertEquals(book.key, 'OL17075811W', 'key/id');
   assertEquals(book.authors.length === 1, true, 'authors length');
 });
 
@@ -33,7 +33,7 @@ Deno.test('Get book by `isbn`, Sapiens id: OL17075811W', async () => {
 
   assertExists(book);
   assertEquals(book.title.includes('Sapiens'), true, 'title');
-  assertEquals(book.key, '/works/OL17075811W', 'key/id');
+  assertEquals(book.key, 'OL17075811W', 'key/id');
   assertEquals(book.authors.length === 1, true, 'authors length');
 });
 
@@ -57,7 +57,7 @@ Deno.test('Get author by id, Yuval Noah Harari id: OL3778242A', async () => {
 
   assertExists(author);
   assertEquals(author.name, 'Yuval Noah Harari', 'name');
-  assertEquals(author.key, '/authors/OL3778242A', 'key/id');
+  assertEquals(author.key, 'OL3778242A', 'key/id');
 });
 
 Deno.test('Get subject by key, Love id: love', async () => {
@@ -65,7 +65,7 @@ Deno.test('Get subject by key, Love id: love', async () => {
 
   assertExists(subject);
   assertEquals(subject.name, 'love', 'name');
-  assertEquals(subject.key, '/subjects/love', 'key/id');
+  assertEquals(subject.key, 'love', 'key/id');
 });
 
 Deno.test('Get subject by name, Technology and civilization id: technology_and_civilization', async () => {
@@ -73,7 +73,7 @@ Deno.test('Get subject by name, Technology and civilization id: technology_and_c
 
   assertExists(subject);
   assertEquals(subject.name, 'technology and civilization', 'name');
-  assertEquals(subject.key, '/subjects/technology_and_civilization', 'key/id');
+  assertEquals(subject.key, 'technology_and_civilization', 'key/id');
 });
 
 Deno.test('Get subject by name, Technology and civilization id: technology_and_civilization', async () => {
@@ -81,5 +81,5 @@ Deno.test('Get subject by name, Technology and civilization id: technology_and_c
 
   assertExists(subject);
   assertEquals(subject.name, 'technology and civilization', 'name');
-  assertEquals(subject.key, '/subjects/technology_and_civilization', 'key/id');
+  assertEquals(subject.key, 'technology_and_civilization', 'key/id');
 });

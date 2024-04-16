@@ -1,5 +1,13 @@
 import { z } from '../deps.ts';
 
+const key = z.string().transform((value) => {
+  const split = value.split('/');
+  if (split.length <= 1) {
+    return value;
+  }
+  return split[split.length - 1];
+});
+
 const Doc = z.object({
   cover_i: z.number().optional(),
   has_fulltext: z.boolean(),
@@ -35,8 +43,7 @@ const Date = z.object({
 
 export const Book = z.object({
   title: z.string(),
-  // TODO: Transform
-  key: z.string(),
+  key,
   authors: z.array(AuthorObj),
   type: z.object({
     key: z.string(),
@@ -69,8 +76,7 @@ export const ISBNResult = z.object({
 const stringDate = z.string(z.date());
 
 export const Author = z.object({
-  // TODO: Transform
-  key: z.string(),
+  key,
   name: z.string(),
   personal_name: z.string(),
   remote_ids: z.object({
@@ -106,8 +112,7 @@ export const Author = z.object({
 
 export const SubjectResult = z.object(
   {
-    // TODO: transform
-    key: z.string(),
+    key,
     name: z.string(),
     subject_type: z.string(),
     work_count: z.number(),
