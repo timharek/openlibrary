@@ -1,6 +1,6 @@
 {
   "name": "books",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "tasks": {
     "run": "deno run --allow-net=openlibrary.org src/cli.ts",
     "check": "deno fmt --check && deno lint",
