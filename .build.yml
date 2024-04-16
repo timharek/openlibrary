@@ -15,6 +15,7 @@ tasks:
   - test: |
       cd $DIR
       deno task check
+      deno task test
   - check_release: |
       cd $DIR
       if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then \
