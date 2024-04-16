@@ -1,6 +1,7 @@
 import { SubjectResult } from './schemas.ts';
 import { Author, ISBNResult } from './schemas.ts';
 import { Book, Search } from './schemas.ts';
+import { toSnakeCase } from 'https://deno.land/std@0.221.0/text/mod.ts';
 
 const API_URL = new URL('https://openlibrary.org');
 
@@ -80,13 +81,13 @@ export async function getBookByISBN(isbn: string): Promise<Book> {
 }
 
 /**
- * Get a book subject based on its key (snake-cased of actual title), `key`, from Open Library's API.
+ * Get a book subject based on its key or name, `key`, from Open Library's API.
  *
  * @returns Subject
  */
-export async function getSubject(key: string): Promise<SubjectResult> {
+export async function getSubject(keyOrName: string): Promise<SubjectResult> {
   const url = API_URL;
-  url.pathname = `/subjects/${key}.json`;
+  url.pathname = `/subjects/${toSnakeCase(keyOrName)}.json`;
 
   const result = await _fetch(url);
   return SubjectResult.parse(result);
