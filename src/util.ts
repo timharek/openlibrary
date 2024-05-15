@@ -1,7 +1,7 @@
 import { SubjectResult } from './schemas.ts';
 import { Author, ISBNResult } from './schemas.ts';
 import { Book, Search } from './schemas.ts';
-import { toSnakeCase } from 'https://deno.land/std@0.221.0/text/mod.ts';
+import { toSnakeCase } from 'jsr:@std/text@0.224.0';
 
 const API_URL = new URL('https://openlibrary.org');
 

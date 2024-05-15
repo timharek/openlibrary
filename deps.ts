@@ -1,3 +1,3 @@
-export { Command } from 'https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts';
-export { Select } from 'https://deno.land/x/cliffy@v1.0.0-rc.3/prompt/mod.ts';
-export { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts';
+export { Command } from 'jsr:@cliffy/command@1.0.0-rc.4';
+export { Select } from 'jsr:@cliffy/prompt@1.0.0-rc.4';
+export { z } from 'npm:zod@3.23.8';

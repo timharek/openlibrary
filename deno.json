@@ -1,6 +1,11 @@
 {
-  "name": "books",
-  "version": "1.4.0",
+  "name": "@timharek/openlibrary",
+  "version": "1.4.1",
+  "exports": {
+    ".": "./mod.ts",
+    "./cli": "./src/cli.ts"
+  },
+  "author": "Tim Hårek Andreassen <tim@harek.no>",
   "tasks": {
     "run": "deno run --allow-net=openlibrary.org src/cli.ts",
     "check": "deno fmt --check && deno lint",
@@ -19,6 +24,9 @@
     "rules": {
       "tags": [
         "recommended"
+      ],
+      "exclude": [
+        "no-slow-types"
       ]
     }
   },
