@@ -122,7 +122,7 @@ export const SubjectResult = z.object(
         title: z.string(),
         edition_count: z.number(),
         cover_id: z.number(),
-        cover_edition_key: z.string(),
+        cover_edition_key: z.string().nullable(),
         subject: z.array(z.string()),
         ia_collection: z.array(z.string()),
         lendinglibrary: z.boolean(),
