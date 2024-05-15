@@ -17,6 +17,11 @@ const app = new Command()
   .meta('Author', 'Tim Hårek Andreassen <tim@harek.no>')
   .meta('Source', 'https://git.sr.ht/~timharek/deno-books')
   .globalOption('--json', 'JSON output.');
+
+/**
+ * Only relevant the CLI's options.
+ * @private
+ */
 export type GlobalOptions = typeof app extends
   Command<void, void, void, [], infer Options extends Record<string, unknown>>
   ? Options
