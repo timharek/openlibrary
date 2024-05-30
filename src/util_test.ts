@@ -37,7 +37,7 @@ Deno.test('Get book by `isbn`, Sapiens id: OL17075811W', async () => {
   assertEquals(book.authors.length === 1, true, 'authors length');
 });
 
-Deno.test('Get book by `isbn`, Essentialism () 0753558696', async () => {
+Deno.test('Get book by `isbn`, Essentialism 0753558696', async () => {
   const book = await getBookByISBN('0753558696');
 
   assertExists(book);

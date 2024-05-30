@@ -20,6 +20,7 @@ const Doc = z.object({
   author_key: z.array(z.string()).optional(),
   public_scan_b: z.boolean(),
   isbn: z.array(z.string()).optional(),
+  language: z.array(z.string()).optional(),
 });
 
 export const Search = z.object({
@@ -83,8 +84,8 @@ export const Author = z.object({
   remote_ids: z.object({
     isni: z.string().optional(),
     viaf: z.string().optional(),
-    wikidata: z.string(),
-  }),
+    wikidata: z.string().optional(),
+  }).optional(),
   source_records: z.array(z.string()).optional(),
   alternate_names: z.array(z.string()).optional(),
   links: z.array(z.object({
