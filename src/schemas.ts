@@ -79,23 +79,23 @@ const stringDate = z.string(z.date());
 export const Author = z.object({
   key,
   name: z.string(),
-  personal_name: z.string(),
+  personal_name: z.string().optional(),
   remote_ids: z.object({
-    isni: z.string(),
-    viaf: z.string(),
+    isni: z.string().optional(),
+    viaf: z.string().optional(),
     wikidata: z.string(),
   }),
-  source_records: z.array(z.string()),
-  alternate_names: z.array(z.string()),
+  source_records: z.array(z.string()).optional(),
+  alternate_names: z.array(z.string()).optional(),
   links: z.array(z.object({
     url: z.string().url(),
     title: z.string(),
     type: z.object({
       key: z.string(),
     }),
-  })),
-  photos: z.array(z.number()),
-  birth_date: stringDate,
+  })).optional(),
+  photos: z.array(z.number()).optional(),
+  birth_date: stringDate.optional(),
   type: z.object({
     key: z.string(),
   }),
