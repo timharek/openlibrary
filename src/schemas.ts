@@ -100,12 +100,12 @@ export const Author = z.object({
   type: z.object({
     key: z.string(),
   }),
-  latest_revision: z.number(),
+  latest_revision: z.number().optional(),
   revision: z.number(),
   created: z.object({
     type: z.string(),
     value: stringDate,
-  }),
+  }).optional(),
   last_modified: z.object({
     type: z.string(),
     value: stringDate,

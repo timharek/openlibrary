@@ -86,6 +86,14 @@ Deno.test('Get author by id, Greg McKeown id: OL7224934A', async () => {
   assertEquals(author.key, 'OL7224934A', 'key/id');
 });
 
+Deno.test('Get author by id, Carmine Gallo id: OL1391861A', async () => {
+  const author = await getAuthor('OL1391861A');
+
+  assertExists(author);
+  assertEquals(author.name, 'Carmine Gallo', 'name');
+  assertEquals(author.key, 'OL1391861A', 'key/id');
+});
+
 Deno.test('Get subject by key, Love id: love', async () => {
   const subject = await getSubject('love');
 
