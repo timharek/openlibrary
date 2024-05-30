@@ -1,6 +1,6 @@
 {
   "name": "@timharek/openlibrary",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "exports": {
     ".": "./mod.ts",
     "./cli": "./src/cli.ts"
@@ -39,5 +39,9 @@
     "indentWidth": 2,
     "singleQuote": true,
     "proseWrap": "preserve"
-  }
+  },
+  "exclude": [
+    "**/*.md",
+    "**/*.json"
+  ]
 }

@@ -19,6 +19,7 @@ const Doc = z.object({
   ia: z.array(z.string()).optional(),
   author_key: z.array(z.string()).optional(),
   public_scan_b: z.boolean(),
+  isbn: z.array(z.string()).optional(),
 });
 
 export const Search = z.object({
