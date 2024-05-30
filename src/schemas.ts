@@ -58,7 +58,7 @@ export const Book = z.object({
       return desc;
     }
     return desc.value;
-  }),
+  }).optional(),
   covers: z.array(z.number()),
   subject_places: z.array(z.string()).optional(),
   subjects: z.array(z.string()),

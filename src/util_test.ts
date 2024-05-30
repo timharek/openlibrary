@@ -46,6 +46,15 @@ Deno.test('Get book by `isbn`, Essentialism 0753558696', async () => {
   assertEquals(book.authors.length === 1, true, 'authors length');
 });
 
+Deno.test('Get book by `isbn`, Talk Like TED: 9781250061539', async () => {
+  const book = await getBookByISBN('9781250061539');
+
+  assertExists(book);
+  assertEquals(book.title, 'Talk like TED', 'title');
+  assertEquals(book.key, 'OL17076301W', 'key/id');
+  assertEquals(book.authors.length === 1, true, 'authors length');
+});
+
 Deno.test('Search for book by title, Sapiens', async () => {
   const searchResult = await searchBook('Sapiens');
 
