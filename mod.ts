@@ -4,4 +4,4 @@ export {
   getBookByISBN,
   getSubject,
   searchBook,
-} from './src/util.ts';
+} from './src/openlibrary.ts';

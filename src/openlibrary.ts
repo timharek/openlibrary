@@ -2,23 +2,9 @@ import { SubjectResult } from './schemas.ts';
 import { Author, ISBNResult } from './schemas.ts';
 import { Book, Search } from './schemas.ts';
 import { toSnakeCase } from 'jsr:@std/text@0.224.0';
+import { getRequest } from './utils.ts';
 
 const API_URL = new URL('https://openlibrary.org');
-
-async function _fetch(url: string | URL): Promise<unknown> {
-  const result = await fetch(url, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .catch((error) => {
-      console.log(error);
-    });
-
-  return result;
-}
 
 /**
  * Search for book based on `query` from Open Library's API.
@@ -30,7 +16,7 @@ export async function searchBook(query: string): Promise<Search> {
   url.pathname = '/search.json';
   url.searchParams.set('q', query);
 
-  const result = await _fetch(url);
+  const result = await getRequest(url);
   return Search.parse(result);
 }
 
@@ -43,7 +29,7 @@ export async function getBook(id: string): Promise<Book> {
   const url = API_URL;
   url.pathname = `/works/${id}.json`;
 
-  const result = await _fetch(url);
+  const result = await getRequest(url);
   return Book.parse(result);
 }
 
@@ -56,7 +42,7 @@ export async function getAuthor(id: string): Promise<Author> {
   const url = API_URL;
   url.pathname = `/authors/${id}.json`;
 
-  const result = await _fetch(url);
+  const result = await getRequest(url);
   return Author.parse(result);
 }
 
@@ -69,7 +55,7 @@ export async function getBookByISBN(isbn: string): Promise<Book> {
   const url = API_URL;
   url.pathname = `isbn/${isbn}.json`;
 
-  const result = await _fetch(url);
+  const result = await getRequest(url);
   const isbnResult = ISBNResult.parse(result);
   const id = isbnResult.works[0].key.split('/').at(-1);
   if (!id) {
@@ -89,6 +75,6 @@ export async function getSubject(keyOrName: string): Promise<SubjectResult> {
   const url = API_URL;
   url.pathname = `/subjects/${toSnakeCase(keyOrName)}.json`;
 
-  const result = await _fetch(url);
+  const result = await getRequest(url);
   return SubjectResult.parse(result);
 }

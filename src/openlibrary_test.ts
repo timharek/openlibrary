@@ -8,7 +8,7 @@ import {
   getBookByISBN,
   getSubject,
   searchBook,
-} from './util.ts';
+} from './openlibrary.ts';
 
 Deno.test('Get book by `id`, Sapiens id: OL17075811W', async () => {
   const book = await getBook('OL17075811W');
