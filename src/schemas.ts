@@ -1,4 +1,4 @@
-import { z } from '../deps.ts';
+import { z } from 'zod';
 
 const key = z.string().transform((value) => {
   const split = value.split('/');
