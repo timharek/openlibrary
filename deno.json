@@ -9,6 +9,9 @@
     "setup:hooks": "deno run -A -r https://deno.land/x/githooks/githooks.ts",
     "test": "deno test --allow-net=openlibrary.org"
   },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^0.226.0"
+  },
   "githooks": {
     "pre-commit": "check",
     "pre-push": "check"

@@ -1,3 +1,6 @@
+/** Base URL for Open Library's API */
+export const API_URL = new URL('https://openlibrary.org');
+
 /**
  * Helper-function for a unified way of fetching JSON-data.
  */

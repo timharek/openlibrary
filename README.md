@@ -10,13 +10,13 @@ searching books, authors etc.
 ## Examples
 
 ```typescript
-import { getBook } from "jsr:@timharek/openlibrary";
+import { book } from "jsr:@timharek/openlibrary";
 
-const book = await getBook("OL17914663W");
+const result = await book.get("OL17914663W");
 ```
 
 ```typescript
-import { searchBook } from "jsr:@timharek/openlibrary";
+import { book } from "jsr:@timharek/openlibrary";
 
-const result = await searchBook("All Systems Red");
+const result = await book.search("All Systems Red");
 ```
