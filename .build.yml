@@ -12,12 +12,12 @@ triggers:
     to: tim@harek.no
 tasks:
   - setup: |
-      echo 'cd deno-books' >> ~/.buildenv
+      echo 'cd openlibrary' >> ~/.buildenv
   - test: |
       deno task check
       deno task test
   - mirror: |
-      git push --force --mirror git@github.com:timharek/deno-books.git
+      git push --force --mirror git@github.com:timharek/openlibrary
   - check_release: |
       tag=$(git describe --exact-match 2>/dev/null || true)
       if [ -z "$tag" ]; then
