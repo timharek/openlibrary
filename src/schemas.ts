@@ -13,20 +13,20 @@ const Doc = z.object({
   has_fulltext: z.boolean(),
   edition_count: z.number(),
   title: z.string(),
-  author_name: z.array(z.string()).optional(),
+  author_name: z.array(z.string()).optional().default([]),
   first_publish_year: z.number().optional(),
   key: z.string(),
-  ia: z.array(z.string()).optional(),
-  author_key: z.array(z.string()).optional(),
+  ia: z.array(z.string()).optional().default([]),
+  author_key: z.array(z.string()).optional().default([]),
   public_scan_b: z.boolean(),
-  isbn: z.array(z.string()).optional(),
-  language: z.array(z.string()).optional(),
+  isbn: z.array(z.string()).optional().default([]),
+  language: z.array(z.string()).optional().default([]),
 });
 
 export const Search = z.object({
   start: z.number(),
   num_found: z.number(),
-  docs: z.array(Doc),
+  docs: z.array(Doc).default([]),
 });
 
 const AuthorObj = z.object({
@@ -59,11 +59,11 @@ export const Book = z.object({
     }
     return desc.value;
   }).optional(),
-  covers: z.array(z.number()),
-  subject_places: z.array(z.string()).optional(),
-  subjects: z.array(z.string()),
-  subject_people: z.array(z.string()).optional(),
-  subject_times: z.array(z.string()).optional(),
+  covers: z.array(z.number()).optional().default([]),
+  subject_places: z.array(z.string()).optional().default([]),
+  subjects: z.array(z.string()).optional().default([]),
+  subject_people: z.array(z.string()).optional().default([]),
+  subject_times: z.array(z.string()).optional().default([]),
   location: z.string().optional(),
   latest_revision: z.number(),
   revision: z.number(),
@@ -72,7 +72,7 @@ export const Book = z.object({
 });
 
 export const ISBNResult = z.object({
-  works: z.array(z.object({ key: z.string() })),
+  works: z.array(z.object({ key: z.string() })).default([]),
 });
 
 const stringDate = z.string(z.date());
@@ -86,16 +86,16 @@ export const Author = z.object({
     viaf: z.string().optional(),
     wikidata: z.string().optional(),
   }).optional(),
-  source_records: z.array(z.string()).optional(),
-  alternate_names: z.array(z.string()).optional(),
+  source_records: z.array(z.string()).optional().default([]),
+  alternate_names: z.array(z.string()).optional().default([]),
   links: z.array(z.object({
     url: z.string().url(),
     title: z.string(),
     type: z.object({
       key: z.string(),
     }),
-  })).optional(),
-  photos: z.array(z.number()).optional(),
+  })).optional().default([]),
+  photos: z.array(z.number()).optional().default([]),
   birth_date: stringDate.optional(),
   type: z.object({
     key: z.string(),
