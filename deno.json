@@ -1,6 +1,6 @@
 {
   "name": "@timharek/openlibrary",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "exports": "./mod.ts",
   "author": "Tim Hårek Andreassen <tim@harek.no>",
   "tasks": {
@@ -18,9 +18,9 @@
     "pre-push": "check"
   },
   "lint": {
-    "include": [
-      "src/",
-      "types/"
+    "exclude": [
+      "**/*.md",
+      "**/*.json"
     ],
     "rules": {
       "tags": [
@@ -32,24 +32,14 @@
     }
   },
   "fmt": {
-    "include": [
-      "./"
+    "exclude": [
+      "**/*.md",
+      "**/*.json"
     ],
     "useTabs": false,
     "lineWidth": 80,
     "indentWidth": 2,
     "singleQuote": true,
     "proseWrap": "preserve"
-  },
-  "publish": {
-    "include": [
-      "LICENSE",
-      "README.md",
-      "src/**/*.ts"
-    ]
-  },
-  "exclude": [
-    "**/*.md",
-    "**/*.json"
-  ]
+  }
 }
