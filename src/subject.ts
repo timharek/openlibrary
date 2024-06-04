@@ -6,6 +6,14 @@ import { API_URL, getRequest } from './utils.ts';
  * Get a book subject based on its key or name, `key`, from Open Library's API.
  *
  * @returns Subject
+ *
+ * @example
+ * ```typescript
+ * import { subject } from "jsr:@timharek/openlibrary";
+ *
+ * const result = await subject.get("Technology and civilization");
+ * // Result should be Technology and civilization
+ * ```
  */
 async function get(keyOrName: string): Promise<SubjectResult> {
   const url = API_URL;

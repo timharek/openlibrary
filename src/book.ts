@@ -5,6 +5,13 @@ import { API_URL, getRequest } from './utils.ts';
  * Search for book based on `query` from Open Library's API.
  *
  * @returns Search results
+ *
+ * @example
+ * ```typescript
+ * import { book } from "jsr:@timharek/openlibrary";
+ *
+ * const result = await book.search("Sapiens");
+ * ```
  */
 async function search(query: string): Promise<Search> {
   const url = API_URL;
@@ -19,6 +26,14 @@ async function search(query: string): Promise<Search> {
  * Get book based on its Open Library's ID, `id`, from Open Library's API.
  *
  * @returns Book
+ *
+ * @example
+ * ```typescript
+ * import { book } from "jsr:@timharek/openlibrary";
+ *
+ * const result = await book.get("OL17075811W");
+ * // Result should be Sapiens by Yuval Noah Harari
+ * ```
  */
 async function get(id: string): Promise<Book> {
   const url = API_URL;
@@ -32,6 +47,14 @@ async function get(id: string): Promise<Book> {
  * Get book based on one of its ISBNs, `isbn`, from Open Library's API.
  *
  * @returns Book
+ *
+ * @example
+ * ```typescript
+ * import { book } from "jsr:@timharek/openlibrary";
+ *
+ * const result = await book.getByISBN("9780099590088");
+ * // Result should be Sapiens by Yuval Noah Harari
+ * ```
  */
 async function getByISBN(isbn: string): Promise<Book> {
   const url = API_URL;
