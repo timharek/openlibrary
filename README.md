@@ -7,6 +7,16 @@
 API client for [OpenLibrary](https://openlibrary.org/developers/api)'s API for
 searching books, authors etc.
 
+## Installation
+
+```bash
+deno add @timharek/openlibrary
+# or using NPM
+npx jsr add @timharek/openlibrary
+# or using Bun
+bunx jsr add @timharek/openlibrary
+```
+
 ## Examples
 
 ```typescript
