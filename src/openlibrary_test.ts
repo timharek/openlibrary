@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertExists,
-} from 'https://deno.land/std@0.222.1/assert/mod.ts';
+import { assertEquals, assertExists } from 'jsr:@std/assert@0.226.0';
 import {
   getAuthor,
   getBook,
