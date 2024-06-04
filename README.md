@@ -9,12 +9,5 @@ Access [OpenLibrary](https://openlibrary.org/developers/api)'s API via Deno.
 ## Usage
 
 ```typescript
-import { getBook, searchBook } from 'jsr:@timharek/openlibrary';
-```
-
-## Install as CLI
-
-```sh
-deno install --allow-net=openlibrary.org \
-  -n books jsr:@timharek/openlibrary/cli
+import { getBook, searchBook } from "jsr:@timharek/openlibrary";
 ```

@@ -1,10 +1,7 @@
 {
   "name": "@timharek/openlibrary",
-  "version": "1.4.4",
-  "exports": {
-    ".": "./mod.ts",
-    "./cli": "./src/cli.ts"
-  },
+  "version": "2.0.0",
+  "exports": "./mod.ts",
   "author": "Tim Hårek Andreassen <tim@harek.no>",
   "tasks": {
     "run": "deno run --allow-net=openlibrary.org src/cli.ts",
