@@ -41,6 +41,13 @@
     "singleQuote": true,
     "proseWrap": "preserve"
   },
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "src/**/*.ts"
+    ]
+  },
   "exclude": [
     "**/*.md",
     "**/*.json"
