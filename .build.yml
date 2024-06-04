@@ -16,12 +16,14 @@ tasks:
   - test: |
       deno task check
       deno task test
-  - check_release: |
-      if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD)" ]; then \
-        complete-build; \
-      fi
   - mirror: |
       git push --force --mirror git@github.com:timharek/deno-books.git
+  - check_release: |
+      tag=$(git describe --exact-match 2>/dev/null || true)
+      if [ -z "$tag" ]; then
+        echo "Current commit is not a tag: not a new release"
+        complete-build
+      fi
   - new_release: |
       set +x
       export JSR_API=$(cat ~/jsr_timharek)
