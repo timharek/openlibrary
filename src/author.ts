@@ -18,7 +18,7 @@ async function get(id: string): Promise<Author> {
   const url = new URL(`/authors/${id}.json`, API_URL);
 
   const result = await getRequest(url);
-  return Author.parse(result);
+  return Author.passthrough().parse(result);
 }
 
 /**

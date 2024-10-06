@@ -18,7 +18,7 @@ async function search(query: string): Promise<Search> {
   url.searchParams.set('q', query);
 
   const result = await getRequest(url);
-  return Search.parse(result);
+  return Search.passthrough().parse(result);
 }
 
 /**
@@ -38,7 +38,7 @@ async function get(id: string): Promise<Book> {
   const url = new URL(`/works/${id}.json`, API_URL);
 
   const result = await getRequest(url);
-  const book = Book.parse(result);
+  const book = Book.passthrough().parse(result);
 
   // If the book has been moved to a different ID
   if (book.type.key === '/type/redirect' && book.location) {
@@ -69,14 +69,14 @@ async function getByISBN(isbn: string): Promise<Book> {
   const url = new URL(`isbn/${isbn}.json`, API_URL);
 
   const result = await getRequest(url);
-  const isbnResult = ISBNResult.parse(result);
+  const isbnResult = ISBNResult.passthrough().parse(result);
   const id = isbnResult.works[0].key.split('/').at(-1);
   if (!id) {
     throw new Error('Missing works id');
   }
   const bookResult = await book.get(id);
 
-  return Book.parse(bookResult);
+  return Book.passthrough().parse(bookResult);
 }
 
 /**

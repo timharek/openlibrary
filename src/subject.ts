@@ -19,7 +19,7 @@ async function get(keyOrName: string): Promise<SubjectResult> {
   const url = new URL(`/subjects/${toSnakeCase(keyOrName)}.json`, API_URL);
 
   const result = await getRequest(url);
-  return SubjectResult.parse(result);
+  return SubjectResult.passthrough().parse(result);
 }
 
 /**
