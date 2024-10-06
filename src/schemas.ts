@@ -29,42 +29,95 @@ export const Search = z.object({
   docs: z.array(Doc).default([]),
 });
 
-const AuthorObj = z.object({
-  author: z.object({
-    key: z.string(),
-  }),
-  type: z.object({
-    key: z.string(),
-  }),
-});
+const AuthorObj = z
+  .object({
+    author: z.object({
+      key: z.string(),
+    }),
+    type: z.object({
+      key: z.string(),
+    }),
+  })
+  .or(
+    z
+      .object({
+        key: z.string(),
+      })
+      .transform((author) => ({
+        author,
+        type: {
+          key: "/type/author_role",
+        },
+      })),
+  );
 
 const Date = z.object({
   type: z.literal('/type/datetime'),
   value: z.string(),
 });
 
-export const Book = z.object({
-  title: z.string().optional(),
-  key,
-  authors: z.array(AuthorObj).optional(),
-  type: z.object({
-    key: z.enum(['/type/work', '/type/redirect']),
-  }),
-  description: z.string().or(z.object({
-    type: z.literal('/type/text'),
-    value: z.string(),
-  })).transform((desc) => {
+const StringOrTextObject = z
+  .string()
+  .or(
+    z.object({
+      type: z.literal('/type/text'),
+      value: z.string(),
+    })
+  )
+  .transform((desc) => {
     if (typeof desc === 'string') {
       return desc;
     }
     return desc.value;
-  }).optional(),
+  })
+
+export const Book = z.object({
+  /**
+   * Arrays of external platform identifiers
+   * 
+   * @example { goodreads: ["1507552"], librarything: ["6446"] }
+  */
+  identifiers: z
+    .record(
+      z.string(),
+      z.array(z.string()),
+    )
+    .optional(),
+  title: z.string().optional(),
+  key,
+  authors: z.array(AuthorObj).optional(),
+  type: z.object({
+    key: z.enum(['/type/work', '/type/redirect', '/type/edition']),
+  }),
+  description: StringOrTextObject.optional(),
   covers: z.array(z.number()).optional().default([]),
   subject_places: z.array(z.string()).optional().default([]),
   subjects: z.array(z.string()).optional().default([]),
   subject_people: z.array(z.string()).optional().default([]),
   subject_times: z.array(z.string()).optional().default([]),
+  /**
+   * Redirect path for when `type.key` is `/type/redirect`.
+   * Redirects are handled automatically in `book.get`.
+   */
   location: z.string().optional(),
+  contributions: z.array(z.string()).optional(),
+  /**
+   * Array of colon-separated source identifiers
+   * 
+   * @example `ia:fantasticmrfox00dahl_834` = `archive.org/details/fantasticmrfox00dahl_834`
+   */
+  source_records: z.array(z.string()).optional().default([]),
+  local_id: z.array(z.string()).optional().default([]),
+  // Not confident that this could be a string but I saw that `description`
+  // unioned a /type/text object so I thought it would make sense for them
+  // to be the same.
+  first_sentence: StringOrTextObject.optional(),
+  number_of_pages: z.number().optional(),
+  works: z.array(z.object({ key })).optional(),
+  /** Internet archive ID */
+  ocaid: z.string().optional(),
+  isbn_10: z.array(z.string()).optional(),
+  isbn_13: z.array(z.string()).optional(),
   latest_revision: z.number(),
   revision: z.number(),
   created: Date,
