@@ -15,8 +15,7 @@ import { API_URL, getRequest } from './utils.ts';
  * ```
  */
 async function get(id: string): Promise<Author> {
-  const url = API_URL;
-  url.pathname = `/authors/${id}.json`;
+  const url = new URL(`/authors/${id}.json`, API_URL);
 
   const result = await getRequest(url);
   return Author.parse(result);

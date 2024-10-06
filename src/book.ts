@@ -14,8 +14,7 @@ import { API_URL, getRequest } from './utils.ts';
  * ```
  */
 async function search(query: string): Promise<Search> {
-  const url = API_URL;
-  url.pathname = '/search.json';
+  const url = new URL('/search.json', API_URL);
   url.searchParams.set('q', query);
 
   const result = await getRequest(url);
@@ -36,8 +35,7 @@ async function search(query: string): Promise<Search> {
  * ```
  */
 async function get(id: string): Promise<Book> {
-  const url = API_URL;
-  url.pathname = `/works/${id}.json`;
+  const url = new URL(`/works/${id}.json`, API_URL);
 
   const result = await getRequest(url);
   const book = Book.parse(result);
@@ -68,8 +66,7 @@ async function get(id: string): Promise<Book> {
  * ```
  */
 async function getByISBN(isbn: string): Promise<Book> {
-  const url = API_URL;
-  url.pathname = `isbn/${isbn}.json`;
+  const url = new URL(`isbn/${isbn}.json`, API_URL);
 
   const result = await getRequest(url);
   const isbnResult = ISBNResult.parse(result);

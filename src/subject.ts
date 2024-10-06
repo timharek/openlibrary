@@ -16,8 +16,7 @@ import { API_URL, getRequest } from './utils.ts';
  * ```
  */
 async function get(keyOrName: string): Promise<SubjectResult> {
-  const url = API_URL;
-  url.pathname = `/subjects/${toSnakeCase(keyOrName)}.json`;
+  const url = new URL(`/subjects/${toSnakeCase(keyOrName)}.json`, API_URL);
 
   const result = await getRequest(url);
   return SubjectResult.parse(result);
