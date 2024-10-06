@@ -46,7 +46,7 @@ const AuthorObj = z
       .transform((author) => ({
         author,
         type: {
-          key: "/type/author_role",
+          key: '/type/author_role',
         },
       })),
   );
@@ -62,21 +62,21 @@ const StringOrTextObject = z
     z.object({
       type: z.literal('/type/text'),
       value: z.string(),
-    })
+    }),
   )
   .transform((desc) => {
     if (typeof desc === 'string') {
       return desc;
     }
     return desc.value;
-  })
+  });
 
 export const Book = z.object({
   /**
    * Arrays of external platform identifiers
-   * 
+   *
    * @example { goodreads: ["1507552"], librarything: ["6446"] }
-  */
+   */
   identifiers: z
     .record(
       z.string(),
@@ -103,7 +103,7 @@ export const Book = z.object({
   contributions: z.array(z.string()).optional(),
   /**
    * Array of colon-separated source identifiers
-   * 
+   *
    * @example `ia:fantasticmrfox00dahl_834` = `archive.org/details/fantasticmrfox00dahl_834`
    */
   source_records: z.array(z.string()).optional().default([]),
